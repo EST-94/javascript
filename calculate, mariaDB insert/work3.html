@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+추가, 출력버튼으로 시작하여 추가 버튼을 누를 때마다 상단에 input text가 추가되고,<br>
+출력 버튼을 누를 때 추가된 모든 input text의 숫자의 합을 버튼 하단부분에 출력<br><br><br>
+
+plienumber 1 : <input type="text" id="valuearea1" value="int only"><br>
+plienumber 2 : <input type="text" id="valuearea2" value="int only"><br>
+plienumber 3 : <input type="text" id="valuearea3" value="int only"><br>
+plienumber 4 : <input type="text" id="valuearea4" value="int only"><br>
+plienumber 5 : <input type="text" id="valuearea5" value="int only"><br>
+stackondump : <input type="button" id="plus" value="plus"><br>
+pourdump : <input type="button" id="ejact" value="ejact"><br>
+
+<span id=resultArea></span>
+
+  </body>
+
+  <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript">
+
+  let stack = 0;
+  let particles = 0;
+
+    $("#plus").click(function() {
+      let num1 = Number($("#valuearea1").val());
+      let num2 = Number($("#valuearea2").val());
+      let num3 = Number($("#valuearea3").val());
+      let num4 = Number($("#valuearea4").val());
+      let num5 = Number($("#valuearea5").val());
+
+      if (num1 == "" || isNaN(num1)){
+        num1 = 0;
+      }
+      if (num2 == "" || isNaN(num2)){
+        num2 = 0;
+      }
+      if (num3 == "" || isNaN(num3)){
+        num3 = 0;
+      }
+      if (num4 == "" || isNaN(num4)){
+        num4 = 0;
+      }
+      if (num5 == "" || isNaN(num5)){
+        num5 = 0;
+      }
+
+      particles = num1 + num2 + num3 + num4 + num5;
+      stack += particles;
+      $("#resultArea").append(`urstack : ${particles}<br>`);
+      });
+
+
+    $("#ejact").click(function() {
+      $("#resultArea").append(`totalstacked : ${stack}<br>`);
+      });
+  </script>
+</html>

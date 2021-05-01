@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+1~10사이의 라디오버튼 그룹 3개를 통해<br>
+숫자 3개를 입력받아 출력 버튼 클릭시 그 중 가장큰수^가장작은수 의 값을 console에 출력하세요<br>
+(ex. 4 9 2 -> 9^2 = 81, console에 81만 출력)<br><br>
+
+1st<br>
+0 <input type="radio" name="radioName1" checked>
+1 <input type="radio" name="radioName1" checked>
+2 <input type="radio" name="radioName1" checked>
+3 <input type="radio" name="radioName1" checked>
+4 <input type="radio" name="radioName1" checked>
+5 <input type="radio" name="radioName1" checked>
+6 <input type="radio" name="radioName1" checked>
+7 <input type="radio" name="radioName1" checked>
+8 <input type="radio" name="radioName1" checked>
+9 <input type="radio" name="radioName1" checked>
+10 <input type="radio" name="radioName1" checked><br><br>
+
+2nd<br>
+0 <input type="radio" name="radioName2" checked>
+1 <input type="radio" name="radioName2" checked>
+2 <input type="radio" name="radioName2" checked>
+3 <input type="radio" name="radioName2" checked>
+4 <input type="radio" name="radioName2" checked>
+5 <input type="radio" name="radioName2" checked>
+6 <input type="radio" name="radioName2" checked>
+7 <input type="radio" name="radioName2" checked>
+8 <input type="radio" name="radioName2" checked>
+9 <input type="radio" name="radioName2" checked>
+10 <input type="radio" name="radioName2" checked><br><br>
+
+3rd<br>
+0 <input type="radio" name="radioName3" checked>
+1 <input type="radio" name="radioName3" checked>
+2 <input type="radio" name="radioName3" checked>
+3 <input type="radio" name="radioName3" checked>
+4 <input type="radio" name="radioName3" checked>
+5 <input type="radio" name="radioName3" checked>
+6 <input type="radio" name="radioName3" checked>
+7 <input type="radio" name="radioName3" checked>
+8 <input type="radio" name="radioName3" checked>
+9 <input type="radio" name="radioName3" checked>
+10 <input type="radio" name="radioName3" checked><br><br>
+
+<input type="button" value="calculate" id="log"><br>
+<span id="resultArea"></span>
+  </body>
+  <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript">
+  $("#log").click(function(){
+
+    let rn1_nums = 0;
+    let rn2_nums = 0;
+    let rn3_nums = 0;
+
+    for (i = 0; i < $('input[name="radioName1"]').length; i++){
+      if ($('input[name="radioName1"]')[i].checked)
+      rn1_nums = i;
+      if ($('input[name="radioName2"]')[i].checked)
+      rn2_nums = i;
+      if ($('input[name="radioName3"]')[i].checked)
+      rn3_nums = i;
+    };
+
+    let selectedarr = [rn1_nums, rn2_nums, rn3_nums];
+    selectedarr.sort();
+
+    let consoleres = Math.pow(selectedarr[2], selectedarr[0]);
+
+    $("#resultArea").append(`당신이 선택한 수 : ${rn1_nums}, ${rn2_nums}, ${rn3_nums} <br>
+      계산되는 수 : ${selectedarr[2]} ^ ${selectedarr [0]} = ${consoleres} <br>`);
+
+    console.log(consoleres);
+
+  });
+  </script>
+
+</html>

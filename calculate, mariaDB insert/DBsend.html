@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <title></title>
+</head>
+
+<body>
+  submit on table 'student' <br>
+  no : <input type="text" id="no" value="INT ONLY"><br>
+  studentNo : <input type="text" id="stdno" value="STR ONLY"><br>
+  studentName : <input type="text" id="stdname" value="STR ONLY"><br>
+  <input type="button" value="submit on DB" id="bt1">
+</body>
+<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">
+  $("#bt1").click(function() {
+    console.log($("#no").val(), $("#stdno").val(), $("#stdname").val());
+
+    $.ajax({
+      type: "post",
+      url: `/DBsender`,
+      data: {
+        no: $("#no").val(),
+        studentNo: $("#stdno").val(),
+        studentName: $("#stdname").val()
+      },
+      success: function(res) {
+        console.log(res)
+        if (res==`not ok`)
+        alert ("failed")
+        if (res==`ok`)
+        alert ("success!");
+      }
+    });
+  });
+</script>
+</html>

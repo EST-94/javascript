@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    숫자 2개를 input text 2개를 통해 입력받아 출력 버튼 클릭시<br>
+    두 숫자의 합, 차(절대값, 무조건 양수), 곱, 나눗셈(큰 수를 작은 수로 나눈 값)을 console에 출력하세요<br>
+<br>
+    (ex 2, 6입력시 console에더하기 : 8, 빼기 : 4, 곱하기 : 12, 나누기 : 3출력)<br>
+    (ex 8, 2입력시 console에더하기 : 10, 빼기 : 6, 곱하기 : 16, 나누기 : 4출력)<br><br><br>
+
+    num 1 : <input type="text" id="1stnum" value=""><br>
+    num 2 : <input type="text" id="2ndnum" value=""><br>
+    results : <input type="button" id="cal" value="출력"><br>
+    <span id=resultArea></span>
+  </body>
+  <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript">
+    $("#cal").click(function(){
+      let num1 = Number($("#1stnum").val());
+      let num2 = Number($("#2ndnum").val());
+
+      if (num1 == "" || isNaN(num1)){
+        num1 = 0;
+      }
+      if (num2 == "" || isNaN(num2)){
+        num2 = 0;
+      }
+
+      let plusnum = num1 + num2;
+      let minusnum = num1 - num2;
+      let multynum = num1 * num2;
+
+      let dividearr = [num1, num2];
+      for (i = 0; i < dividearr.length; i++){
+        if (dividearr[0]>dividearr[1]){
+          let temp = 0;
+          temp = dividearr[0];
+          dividearr[0] = dividearr[1];
+          dividearr[1] = temp;
+        }
+      }
+
+      let dividenum = dividearr[1] / dividearr[0];
+      if (isNaN(dividenum)){
+        dividenum = 0;
+      }
+
+      $("#resultArea").append(`더하기 : ${plusnum}, 빼기 : ${Math.abs(minusnum)}, 곱하기 : ${multynum}, 나누기 : ${dividenum} <br>`);
+      console.log("plus :", plusnum, ", minus :", Math.abs(minusnum), ", multy :", multynum, ", divide :", dividenum);
+    });
+    </script>
+</html>
