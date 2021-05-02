@@ -1,0 +1,35 @@
+ - 결과값 한 배열로 받기(콘솔만 출력)
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+  </head>
+  <body>
+
+  </body>
+  <script>
+
+  let arr1 = [];
+  let cnt = 0;
+
+  for (let i = 0; i < 500; i++){
+    arr1[i] = i
+    let checker = i + ""
+    let letters = "";
+
+    for (let j = 0; j < checker.length; j++){
+      if (checker[j] % 3 == 0 && checker[j] != 0){
+        cnt++;
+        letters += " 짝"
+        if (cnt != 0){
+          arr1[i] = checker + letters;
+        }
+      }
+    }
+  }
+
+  console.log(arr1);
