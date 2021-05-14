@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <title></title>
+</head>
+
+<body>
+
+  요청이 들어올 때 DB에서 상품 값을 조회하기<br><br>
+
+  itemList<br>
+  item1 - 1000<br>
+  item2 - 5000<br>
+  item3 - 10000<br>
+  item4 - 30000<br>
+  item5 - 50000<br>
+  item6 - 100000<br>
+  item7 - 500000<br><br><br>
+
+  정보 입력<br>
+  <!-- prdid : <input type="text" id="prdId" value="str"><br> -->
+  prdpr : <input type="text" id="prdPr" value="int"><br>
+  <input type="button" value="search" id="bt1"><br><br>
+
+  <span id=resultArea></span>
+
+  </body>
+  <script src = "https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript">
+
+     $("#bt1").click(function(){
+      $.ajax({
+     type: "GET",
+     url: `/listSender`,
+     data: {
+       // prdId : $("#prdId").val(),
+       prdPr : $("#prdPr").val(),
+     },
+     success: function(res){
+       console.log(res)
+       $("#resultArea").append(`we recommand u to buy : ${res}<br>`);
+         }
+       });
+     });
+      </script>
+    </html>

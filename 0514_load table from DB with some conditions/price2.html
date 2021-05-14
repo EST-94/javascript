@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+가격을 입력 후 구입확인 버튼을 누르면 서버로 가격을 전송하고,<br>
+구입 가능한 물품 중 가장 비싼 물품을 response로 받아 alert에 띄우기<br><br>
+itemList<br>
+item1 - 1000<br>
+item2 - 5000<br>
+item3 - 10000<br>
+item4 - 30000<br>
+item5 - 50000<br>
+item6 - 100000<br>
+item7 - 500000<br><br><br>
+
+budget : <input type="text" id="budget" value="int only"><br>
+confirm : <input type="button" id="confirm" value="confirm"><br>
+
+<span id=resultArea></span>
+
+  </body>
+
+  <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript">
+
+  let budget = 0;
+
+    $("#confirm").click(function() {
+      budget = Number($("#budget").val());
+
+      $.ajax({
+        type : "post",
+        url : "/priceSender",
+        data : {
+          userBudget : budget,
+        },
+        success : function(res){
+          console.log(res);
+          alert(res);
+          $("#resultArea").append(`u just buy : ${res}<br>`);
+        }
+      });
+
+    });
+
+  </script>
+</html>
