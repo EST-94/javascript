@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-app.get('/test1', function(req, res) {
+app.get('/main0528', function(req, res) {
   res.sendfile("form.html");
 });
 
@@ -111,5 +111,24 @@ FROM item ORDER BY itemPrice`, function(error, results, fields) {
     }
     res.send(message)
     console.log(message);
+  });
+});
+
+app.get('/listItem', function(req, res) {
+  connection.query(`SELECT *
+  FROM item ORDER BY itemPrice`, function(error, results, fields) {
+    if (error) throw error;
+    console.log(results);
+res.send(results);
+
+  });
+});
+
+app.delete('/deleteItem', function(req, res) {
+  connection.query(`DELETE FROM item WHERE no = ${req.body.itemNo}`, function(error, results, fields) {
+    if (error) throw error;
+    console.log(results);
+res.send(results);
+
   });
 });

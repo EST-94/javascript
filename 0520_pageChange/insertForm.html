@@ -9,21 +9,27 @@
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
 <body>
+  ## 아이템 정보 입력페이지 <br><br><br>
+
   아이템 : <input type="text" name="product" value="" id="inputProduct">
   가격 : <input type="text" name="price" value="" id="inputPrice"><br>
   <input type="button" value="입력" id="btn">
   <input type="button" value="돌아가기" id="backBtn">
+  <input type="button" value="리스트 출력" id="listBtn"><br><br>
+
+  <div id = "listArea">
+  <span id="resultArea"></span></div>
 
   <script>
     $("#backBtn").click(function() {
       console.log($("#inputPrice"));
       $.ajax({
         type: "GET",
-        url: `/test1`,
+        url: `/main0528`,
         data: {
         },
         success: function(res) {
-          location.href = `test1`;
+          location.href = `main0528`;
           console.log(res)
         },
         error: function(res) {}
@@ -43,7 +49,7 @@
 
         },
         success: function(res) {
-          location.href = `test1`;
+          location.href = `main0528`;
           console.log(res)
 
           alert(res);
@@ -52,6 +58,39 @@
         error: function(res) {}
       });
     });
+
+    $("#listBtn").click(function() {
+      $.ajax({
+        type: "GET",
+        url: `/listItem`,
+        data: {
+        },
+        success: function(res) {
+          console.log("showing itemlists")
+          let list = "";
+          for (let i = 0; i < res.length; i++) {
+            list += `<span id = no${res[i].no} >itemNo : ${res[i].no}, name : ${res[i].itemName}, price : ${res[i].itemPrice}  <input type="button" value= "delete" id="deleteBtn" onclick = delFunc(${res[i].no})> <br></span>`;
+          }
+          $("#resultArea").append(list)
+        },
+        error: function(res) {}
+      });
+    });
+
+    function delFunc(no) {
+      $.ajax({
+        type: "DELETE",
+        url: `/deleteItem`,
+        data: {
+          itemNo : no,
+        },
+        success: function(res) {
+          console.log(res)
+          $(`#no${no}`).remove()
+        },
+        error: function(res) {}
+      });
+    };
   </script>
 
 </body>
