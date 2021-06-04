@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+<body>
+
+  <span id="resultArea"></span><br>
+  <input type="button" value="돌아가기" id="backBtn">
+  <input type="button" value="버튼" id="btn1" onclick=plusFunc(1,2)>
+
+
+
+  <script>
+    $.ajax({
+      type: "GET",
+      url: `/listItem`,
+      data: {
+        itemName: $("#inputProduct").val(),
+        itemPrice: $("#inputPrice").val(),
+      },
+      success: function(results) {
+        let list = "";
+        for (let i = 0; i < results.length; i++) {
+          list += `<span id = ${results[i].no}> ${results[i].no} / ${results[i].itemName} / ${results[i].itemPrice}  <input type="button" value="삭제" id="deleteBtn" onclick = delFunc('${results[i].no}')>  <input type="button" value="수정" id="updateBtn" onclick = updateFunc('${results[i].no}')><br> </span>`;
+
+        }
+
+        $("#resultArea").append(list);
+
+        console.log(results)
+      },
+      error: function(res) {}
+
+    });
+
+    function delFunc(no) {
+      $.ajax({
+        type: "DELETE",
+        url: `/delete`,
+        data: {
+          no: no,
+
+        },
+        success: function(results) {
+
+          $(`#${no}`).remove()
+          alert("삭제했다")
+          console.log(results)
+        },
+        error: function(results) {}
+
+      });
+
+    };
+
+
+
+    // function updateFunc(no) {
+    //   $.ajax({
+    //     type: "PUT",
+    //     url: `/updateForm`,
+    //     data: {
+    //       no: no,
+    //
+    //     },
+    //     success: function(results) {
+    //
+    //
+    //       alert($(`#${no}`))
+    //       console.log(results)
+    //     },
+    //     error: function(results) {}
+    //
+    //   });
+    //
+    // };
+
+
+    function updateFunc(no) {
+      $.ajax({
+        type: "GET",
+        url: `/updateForm`,
+        data: {
+          no: no,
+
+        },
+        success: function(results) {
+
+
+          alert(`#${no}`)
+          location.href = `updateForm?${no}`;
+          console.log(results)
+        },
+        error: function(results) {}
+
+      });
+
+    };
+
+
+    $("#backBtn").click(function() {
+      location.href = `test1`;
+
+    });
+
+    $("#btn1").click(function() {
+      console.log(plusFunc(1, 2));
+
+    });
+
+    function plusFunc(num1, num2) {
+      return (num1 + num2);
+    }
+  </script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+<body>
+  아이템 : <input type="text" name="product" value="" id="inputProduct">
+  가격 : <input type="text" name="price" value="" id="inputPrice"><br>
+  <input type="button" value="입력" id="btn">
+  <input type="button" value="돌아가기" id="backBtn">
+
+
+
+  <script>
+    // $("#btn").click(function() {
+    //   console.log($("#inputPrice"));
+    //   $.ajax({
+    //     type: "POST",
+    //     url: `/priceTest1`,
+    //     data: {
+    //       price: $("#inputPrice").val(),
+    //     },
+    //     success: function(res) {
+    //       console.log(res)
+    //
+    //       alert(res)
+    //     },
+    //     error: function(res) {}
+    //   });
+    // });
+
+
+
+    // 입력페이지에서 데이터 입력후 메인페이지로 이동.
+
+    $("#btn").click(function() {
+      console.log($("#inputPrice"));
+      $.ajax({
+        type: "POST",
+        url: `/insertItem`,
+        data: {
+          itemName: $("#inputProduct").val(),
+          itemPrice: $("#inputPrice").val(),
+
+        },
+        success: function(res) {
+          location.href = `test1`;
+          console.log(res)
+
+          alert(res);
+
+        },
+        error: function(res) {}
+      });
+    });
+
+    $("#backBtn").click(function() {
+      location.href = `test1`;
+
+    });
+  </script>
+
+
+
+</body>
+
+</html>

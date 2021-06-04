@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+<body>
+  아이템 이름 : <input type="text" name="product" value="" id="inputProduct">
+  가격 : <input type="text" name="price" value="" id="inputPrice"><br>
+  <input type="button" value="수정" id="updatebtn">
+  <input type="button" value="돌아가기" id="backBtn">
+
+
+
+  <script>
+    let number = location.href.split("?")[1]
+    console.log(number)
+    $.ajax({
+      type: "GET",
+      url: `/showItem`,
+      data: {
+        no: Number(number),
+
+      },
+      success: function(results) {
+        $("#inputProduct").val(results[0].itemName)
+        $("#inputPrice").val(results[0].itemPrice)
+        console.log(results)
+      },
+      error: function(results) {}
+
+    });
+
+    $("#updatebtn").click(function() {
+
+
+
+
+      $.ajax({
+        type: "PUT",
+        url: `/update`,
+        data: {
+          no: number,
+          itemName: $("#inputProduct").val(),
+          itemPrice: $("#inputPrice").val(),
+
+        },
+        success: function(results) {
+
+            alert(results)
+            console.log(results);
+
+        },
+        error: function(results) {
+          alert(results)
+
+        }
+
+      });
+    });
+
+
+
+
+    // 입력페이지에서 데이터 입력후 메인페이지로 이동.
+
+
+
+    $("#backBtn").click(function() {
+      location.href = `test1`;
+
+    });
+  </script>
+
+
+
+</body>
+
+</html>
